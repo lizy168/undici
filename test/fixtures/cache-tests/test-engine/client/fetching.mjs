@@ -11,7 +11,7 @@ export function init (idx, reqConfig, prevResp) {
     init.headers.push(['Cache-Control', 'nothing-to-see-here']) // ditto
   }
   if ('request_method' in reqConfig) init.method = reqConfig.request_method
-  if ('request_headers' in reqConfig) init.headers = reqConfig.request_headers
+  if ('request_headers' in reqConfig) init.headers = init.headers.concat(reqConfig.request_headers)
   if ('magic_ims' in reqConfig && reqConfig.magic_ims === true) {
     for (let i = 0; i < init.headers.length; i++) {
       const header = init.headers[i]
@@ -23,7 +23,7 @@ export function init (idx, reqConfig, prevResp) {
   if ('name' in reqConfig) init.headers.push(['Test-Name', reqConfig.name])
   if ('request_body' in reqConfig) init.body = reqConfig.request_body
   if ('mode' in reqConfig) init.mode = reqConfig.mode
-  if ('credentials' in reqConfig) init.mode = reqConfig.credentials
+  if ('credentials' in reqConfig) init.credentials = reqConfig.credentials
   if ('cache' in reqConfig) init.cache = reqConfig.cache
   if ('redirect' in reqConfig) init.redirect = reqConfig.redirect
   init.headers.push(['Test-ID', reqConfig.id])
